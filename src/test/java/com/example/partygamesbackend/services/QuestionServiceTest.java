@@ -34,28 +34,28 @@ class QuestionServiceTest {
     List<Question> list;
 
     @BeforeEach
-    public void reset(){
+    public void reset() {
         list = Arrays.asList(
-                new Question(1L,"Hur långt är ett rep?"),
-                new Question(2L,"Vilken är din favoritfärg?"),
-                new Question(3L,"Vad är snyggast?")
+                new Question(1L, "Hur långt är ett rep?"),
+                new Question(2L, "Vilken är din favoritfärg?"),
+                new Question(3L, "Vad är snyggast?")
         );
         questionService = new QuestionService(mockRepository);
     }
 
     @Test
-    void getAllQuestions() {
+    void getAllQuestionsTest() {
         when(mockRepository.findAll()).thenReturn(list);
 
         List<Question> actual = questionService.getAllQuestions();
 
-        assertEquals(actual,list);
+        assertEquals(actual, list);
         assertNotEquals(actual, null);
         verify(mockRepository).findAll();
     }
 
     @Test
-    void addQuestion() {
+    void addQuestionTest() {
         when(mockRepository.save(list.get(0))).thenReturn(list.get(0));
 
         Question actual = questionService.addQuestion(list.get(0));
@@ -67,23 +67,39 @@ class QuestionServiceTest {
     }
 
     @Test
-    void addQuestionList() {
+    void addQuestionListTest() {
         when(mockRepository.saveAll(list)).thenReturn(list);
 
         List<Question> actual = questionService.addQuestionList(list);
 
         assertEquals(actual, list);
-        assertNotEquals(actual,null);
+        assertNotEquals(actual, null);
         verify(mockRepository).saveAll(any());
     }
 
     @Test
-    void deleteQuestionById() {
+    void updateQuestionTest() {
+        when(mockRepository.getById(1L)).thenReturn(list.get(0));
+
+        Question newQuestion = new Question(1L, "Ny fråga");
+
+        when(mockRepository.save(any())).thenReturn(newQuestion);
+
+        Question actual = questionService.updateQuestion(list.get(0));
+
+        assertEquals(actual, newQuestion);
+
+        verify(mockRepository).getById(any());
+        verify(mockRepository).save(any());
+    }
+
+    @Test
+    void deleteQuestionByIdTest() {
         when(mockRepository.findById(1L)).thenReturn(Optional.ofNullable(list.get(0)));
 
         String actual = questionService.deleteQuestionById(1L);
 
-        assertEquals(actual,"Removed question with id number: 1");
+        assertEquals(actual, "Removed question with id number: 1");
         assertNotEquals(actual, "Removed question with id number: 2");
 
         verify(mockRepository).findById(1L);
@@ -93,8 +109,8 @@ class QuestionServiceTest {
 
         String actualEmpty = questionService.deleteQuestionById(4L);
 
-        assertEquals(actualEmpty,"Question did not exist in database.");
-        assertNotEquals(actualEmpty,null);
+        assertEquals(actualEmpty, "Question did not exist in database.");
+        assertNotEquals(actualEmpty, null);
 
         verify(mockRepository).findById(4L);
     }

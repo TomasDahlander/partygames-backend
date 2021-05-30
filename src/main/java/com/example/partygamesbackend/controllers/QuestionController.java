@@ -41,6 +41,11 @@ public class QuestionController {
         return questionService.addQuestionList(questions);
     }
 
+    @PutMapping("/update")
+    public Question updateQuestion(@RequestBody Question question){
+        return questionService.updateQuestion(question);
+    }
+
     @DeleteMapping("/delete/by/id/{id}")
     public String deleteQuestionById(@PathVariable Long id){
         return questionService.deleteQuestionById(id);

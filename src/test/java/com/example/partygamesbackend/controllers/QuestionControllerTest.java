@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Arrays;
 import java.util.List;
@@ -57,6 +59,17 @@ class QuestionControllerTest {
 
         mvc.perform(MockMvcRequestBuilders.post("/question/add/list")
                 .content(asJsonString(list))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(200));
+    }
+
+    @Test
+    void updateQuestionTest() throws Exception {
+        Question question = new Question(1L,"Detta är en testfråga");
+
+        mvc.perform(MockMvcRequestBuilders.put("/question/update")
+                .content(asJsonString(question))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200));

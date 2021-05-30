@@ -47,4 +47,10 @@ public class QuestionService {
             return "Removed question with id number: " + id;
         }
     }
+
+    public Question updateQuestion(Question q) {
+        Question question = questionRepository.getById(q.getId());
+        question.setQuestion(q.getQuestion());
+        return questionRepository.save(question);
+    }
 }
