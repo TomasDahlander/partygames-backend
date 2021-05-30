@@ -79,8 +79,6 @@ class QuestionServiceTest {
 
     @Test
     void updateQuestionTest() {
-        when(mockRepository.getById(1L)).thenReturn(list.get(0));
-
         Question newQuestion = new Question(1L, "Ny fråga");
 
         when(mockRepository.save(any())).thenReturn(newQuestion);
@@ -89,7 +87,6 @@ class QuestionServiceTest {
 
         assertEquals(actual, newQuestion);
 
-        verify(mockRepository).getById(any());
         verify(mockRepository).save(any());
     }
 

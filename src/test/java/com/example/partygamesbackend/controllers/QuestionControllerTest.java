@@ -62,16 +62,16 @@ class QuestionControllerTest {
                 .andExpect(status().is(200));
     }
 
-//    @Test
-//    void updateQuestionTest() throws Exception {
-//        Question question = new Question(1L,"Detta är en testfråga");
-//
-//        mvc.perform(MockMvcRequestBuilders.put("/question/update")
-//                .content(asJsonString(question))
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().is(200));
-//    }
+    @Test
+    void updateQuestionTest() throws Exception {
+        Question question = new Question(1L,"Detta är en testfråga");
+
+        mvc.perform(MockMvcRequestBuilders.put("/question/update")
+                .content(asJsonString(question))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(200));
+    }
 
     @Test
     void deleteQuestionByIdTest() throws Exception {

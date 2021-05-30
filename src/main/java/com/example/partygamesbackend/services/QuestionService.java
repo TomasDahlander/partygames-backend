@@ -48,9 +48,7 @@ public class QuestionService {
         }
     }
 
-    public Question updateQuestion(Question q) {
-        Question question = questionRepository.getById(q.getId());
-        question.setQuestion(q.getQuestion());
+    public Question updateQuestion(Question question) {
         return questionRepository.save(question);
     }
 }
