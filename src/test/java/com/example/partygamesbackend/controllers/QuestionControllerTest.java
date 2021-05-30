@@ -10,8 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,14 +31,14 @@ class QuestionControllerTest {
     private MockMvc mvc;
 
     @Test
-    void getAllQuestions() throws Exception {
+    void getAllQuestionsTest() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/question/get")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200));
     }
 
     @Test
-    void addQuestion() throws Exception {
+    void addQuestionTest() throws Exception {
         Question question = new Question(1L,"Detta är en testfråga");
 
         mvc.perform(MockMvcRequestBuilders.post("/question/add")
@@ -51,7 +49,7 @@ class QuestionControllerTest {
     }
 
     @Test
-    void addQuestionList() throws Exception {
+    void addQuestionListTest() throws Exception {
         List<Question> list = Arrays.asList(
                 new Question(1L,"Fråga 1"),
                 new Question(2L,"Fråga 2")
@@ -64,19 +62,19 @@ class QuestionControllerTest {
                 .andExpect(status().is(200));
     }
 
-    @Test
-    void updateQuestionTest() throws Exception {
-        Question question = new Question(1L,"Detta är en testfråga");
+//    @Test
+//    void updateQuestionTest() throws Exception {
+//        Question question = new Question(1L,"Detta är en testfråga");
+//
+//        mvc.perform(MockMvcRequestBuilders.put("/question/update")
+//                .content(asJsonString(question))
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .accept(MediaType.APPLICATION_JSON))
+//                .andExpect(status().is(200));
+//    }
 
-        mvc.perform(MockMvcRequestBuilders.put("/question/update")
-                .content(asJsonString(question))
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().is(200));
-    }
-
     @Test
-    void deleteQuestionById() throws Exception {
+    void deleteQuestionByIdTest() throws Exception {
         mvc.perform(MockMvcRequestBuilders.delete("/question/delete/by/id/2")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200));
