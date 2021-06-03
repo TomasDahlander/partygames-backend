@@ -50,5 +50,10 @@ public class QuestionController {
     public String deleteQuestionById(@PathVariable Long id){
         return questionService.deleteQuestionById(id);
     }
+
+    @DeleteMapping("/delete/ids/{from}/{to}")
+    public List<String> deleteQuestionsBetweenIds(@PathVariable Long from, @PathVariable Long to){
+        return questionService.deleteQuestionsBetweenIds(from,to);
+    }
 }
 

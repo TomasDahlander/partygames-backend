@@ -31,6 +31,13 @@ class QuestionControllerTest {
     private MockMvc mvc;
 
     @Test
+    void infoTest() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/question/")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(200));
+    }
+
+    @Test
     void getAllQuestionsTest() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/question/get")
                 .accept(MediaType.APPLICATION_JSON))
@@ -76,6 +83,13 @@ class QuestionControllerTest {
     @Test
     void deleteQuestionByIdTest() throws Exception {
         mvc.perform(MockMvcRequestBuilders.delete("/question/delete/by/id/2")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(200));
+    }
+
+    @Test
+    void deleteQuestionsBetweenIdsTest() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.delete("/question/delete/ids/1/2")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200));
     }

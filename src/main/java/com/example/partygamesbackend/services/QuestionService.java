@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,5 +51,22 @@ public class QuestionService {
 
     public Question updateQuestion(Question question) {
         return questionRepository.save(question);
+    }
+
+    public List<String> deleteQuestionsBetweenIds(Long from, Long to) {
+        List<String> list = new ArrayList<>();
+        list.add("Deleted questions by id:");
+
+        Long counter = from;
+        while(counter <= to){
+
+            Question question = questionRepository.findById(counter).orElse(null);
+            if(question != null){
+                list.add(String.valueOf(counter));
+                questionRepository.deleteById(counter);
+            }
+            counter++;
+        }
+        return list;
     }
 }

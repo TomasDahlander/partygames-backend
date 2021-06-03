@@ -111,4 +111,19 @@ class QuestionServiceTest {
 
         verify(mockRepository).findById(4L);
     }
+
+    @Test
+    void deleteQuestionsBetweenIdsTest(){
+        when(mockRepository.findById(1L)).thenReturn(Optional.ofNullable(list.get(0)));
+        when(mockRepository.findById(2L)).thenReturn(Optional.ofNullable(list.get(1)));
+
+        List<String> expected = Arrays.asList("Deleted questions by id:","1","2");
+
+        List<String> actual = questionService.deleteQuestionsBetweenIds(1L,2L);
+
+        assertEquals(actual,expected);
+
+        verify(mockRepository).findById(1L);
+        verify(mockRepository).findById(2L);
+    }
 }
