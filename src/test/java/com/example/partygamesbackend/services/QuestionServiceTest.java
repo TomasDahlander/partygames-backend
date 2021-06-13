@@ -55,6 +55,24 @@ class QuestionServiceTest {
     }
 
     @Test
+    void getLatestUpdatedQuestionsTest(){
+        when(mockRepository.findAll()).thenReturn(list);
+
+        List<String> actual = questionService.getLatestUpdatedQuestions();
+
+        List<String> expected = Arrays.asList(
+                "Hur långt är ett rep?",
+                "Vilken är din favoritfärg?",
+                "Vad är snyggast?"
+        );
+
+        assertEquals(actual,expected);
+        assertTrue(actual.get(0) instanceof java.lang.String);
+
+        verify(mockRepository).findAll();
+    }
+
+    @Test
     void addQuestionTest() {
         when(mockRepository.save(list.get(0))).thenReturn(list.get(0));
 

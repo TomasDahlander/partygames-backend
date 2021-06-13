@@ -31,6 +31,11 @@ public class QuestionController {
         return questionService.getAllQuestions();
     }
 
+    @GetMapping("/get/latest/update")
+    public List<String> getLatestUpdatedQuestions(){
+        return questionService.getLatestUpdatedQuestions();
+    }
+
     @PostMapping("/add")
     public Question addQuestion(@RequestBody Question question){
         return questionService.addQuestion(question);

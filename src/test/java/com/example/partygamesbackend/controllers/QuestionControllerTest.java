@@ -45,6 +45,13 @@ class QuestionControllerTest {
     }
 
     @Test
+    void getLatestUpdatedQuestionsTest() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/question/get/latest/update")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(200));
+    }
+
+    @Test
     void addQuestionTest() throws Exception {
         Question question = new Question(1L,"Detta är en testfråga");
 

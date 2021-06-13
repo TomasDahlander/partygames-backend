@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Tomas Dahlander <br>
@@ -68,5 +69,10 @@ public class QuestionService {
             counter++;
         }
         return list;
+    }
+
+    public List<String> getLatestUpdatedQuestions() {
+        List<Question> list = questionRepository.findAll();
+        return list.stream().map(Question::getQuestion).collect(Collectors.toList());
     }
 }
