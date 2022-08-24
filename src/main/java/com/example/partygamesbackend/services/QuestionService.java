@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
  * Time: 14:28 <br>
  * Project: partygames-backend <br>
  */
-@RequiredArgsConstructor
 @Service
 public class QuestionService {
 
