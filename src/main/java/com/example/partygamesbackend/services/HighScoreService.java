@@ -52,6 +52,6 @@ public class HighScoreService {
             highScoreRepository.delete(highScore);
             System.out.println("HighScoreService:deleteBelowThe50Best - Deleted Highscore: " + highScore);
         }
-        System.out.println("HighScoreService:deleteBelowThe50Best - Ampunt of " + difficulty + " highscore are now: " + highScores.size());
+        System.out.println("HighScoreService:deleteBelowThe50Best - Amount of " + difficulty + " highscore are now: " + highScores.size());
     }
 }
