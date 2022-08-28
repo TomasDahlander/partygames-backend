@@ -32,6 +32,7 @@ public class HighScoreService {
                 .name(name)
                 .build();
         highScore = highScoreRepository.save(highScore);
+        System.out.println("HighScoreService:addHighScore - Added highscore: " + highScore);
 
         deleteBelowThe50Best(difficulty);
 
@@ -45,9 +46,12 @@ public class HighScoreService {
 
     private void deleteBelowThe50Best(String difficulty){
         List<HighScore> highScores = highScoreRepository.findByDifficultyOrderByTimeDesc(difficulty);
+        System.out.println("HighScoreService:deleteBelowThe50Best - Amount of " + difficulty + " highscores: " + highScores.size());
         while(highScores.size() > 50){
             HighScore highScore = highScores.remove(0);
             highScoreRepository.delete(highScore);
+            System.out.println("HighScoreService:deleteBelowThe50Best - Deleted Highscore: " + highScore);
         }
+        System.out.println("HighScoreService:deleteBelowThe50Best - Ampunt of " + difficulty + " highscore are now: " + highScores.size());
     }
 }

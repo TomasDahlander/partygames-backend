@@ -39,12 +39,14 @@ public class HighScoreController {
             @RequestParam String date,
             @RequestParam String difficulty,
             @RequestParam String name){
+        System.out.println("HighScoreController:addHighScore - Adding highscore");
         return highScoreService.addHighScore(time,date,difficulty,name);
     }
 
     @DeleteMapping("/delete")
     @ResponseStatus(HttpStatus.OK)
     public String deleteHighScore(){
+        System.out.println("HighScoreController:deleteHighScore - Deleting all highscore entries");
         return highScoreService.deleteHighScore();
     }
 }
