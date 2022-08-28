@@ -14,6 +14,5 @@ import java.util.List;
  * Project: partygames-backend <br>
  */
 public interface HighScoreRepository extends JpaRepository<HighScore, Long> {
-
-    List<HighScore> findByTimeAndDateAndName(int time, LocalDate date, String name);
+    List<HighScore> findByDifficultyOrderByTimeDesc(String difficulty);
 }

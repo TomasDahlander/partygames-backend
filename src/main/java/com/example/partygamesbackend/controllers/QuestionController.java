@@ -2,7 +2,7 @@ package com.example.partygamesbackend.controllers;
 
 import com.example.partygamesbackend.models.Question;
 import com.example.partygamesbackend.services.QuestionService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,10 +16,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/question")
 @CrossOrigin
+@RequiredArgsConstructor
 public class QuestionController {
 
-    @Autowired
-    private QuestionService questionService;
+    private final QuestionService questionService;
 
     @GetMapping("/")
     public String info(){

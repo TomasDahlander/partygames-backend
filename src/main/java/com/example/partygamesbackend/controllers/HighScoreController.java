@@ -34,18 +34,18 @@ public class HighScoreController {
 
     @GetMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addHighScore(
+    public String addHighScore(
             @RequestParam int time,
             @RequestParam String date,
             @RequestParam String difficulty,
             @RequestParam String name){
-        highScoreService.addHighScore(time,date,difficulty,name);
+        return highScoreService.addHighScore(time,date,difficulty,name);
     }
 
     @DeleteMapping("/delete")
     @ResponseStatus(HttpStatus.OK)
-    public String deleteHighScore(@RequestBody HighScore highScore){
-        return highScoreService.deleteHighScore(highScore);
+    public String deleteHighScore(){
+        return highScoreService.deleteHighScore();
     }
 }
 

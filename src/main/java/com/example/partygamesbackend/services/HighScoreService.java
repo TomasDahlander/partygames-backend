@@ -1,17 +1,12 @@
 package com.example.partygamesbackend.services;
 
 import com.example.partygamesbackend.models.HighScore;
-import com.example.partygamesbackend.models.Question;
 import com.example.partygamesbackend.repositories.HighScoreRepository;
-import com.example.partygamesbackend.repositories.QuestionRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by Tomas Dahlander <br>
@@ -29,19 +24,30 @@ public class HighScoreService {
         return highScoreRepository.findAll();
     }
 
-    public void addHighScore(int time, String date, String difficulty, String name) {
+    public String addHighScore(int time, String date, String difficulty, String name) {
         HighScore highScore = HighScore.builder()
                 .time(time)
                 .date(LocalDate.parse(date))
                 .difficulty(difficulty)
                 .name(name)
                 .build();
-        highScoreRepository.save(highScore);
+        highScore = highScoreRepository.save(highScore);
+
+        deleteBelowThe50Best(difficulty);
+
+        return "Added Highscore: " + highScore;
     }
 
-    public String deleteHighScore(HighScore h){
-        List<HighScore> list = highScoreRepository.findByTimeAndDateAndName(h.getTime(), h.getDate(), h.getName());
-        highScoreRepository.deleteAll(list);
-        return "Deleted: " + list;
+    public String deleteHighScore(){
+        highScoreRepository.deleteAll();
+        return "Deleted all highscore entries. Beginning new clean slate.";
+    }
+
+    private void deleteBelowThe50Best(String difficulty){
+        List<HighScore> highScores = highScoreRepository.findByDifficultyOrderByTimeDesc(difficulty);
+        while(highScores.size() > 50){
+            HighScore highScore = highScores.remove(0);
+            highScoreRepository.delete(highScore);
+        }
     }
 }

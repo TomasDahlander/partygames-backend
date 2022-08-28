@@ -3,7 +3,6 @@ package com.example.partygamesbackend.services;
 import com.example.partygamesbackend.models.Question;
 import com.example.partygamesbackend.repositories.QuestionRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,14 +16,10 @@ import java.util.stream.Collectors;
  * Project: partygames-backend <br>
  */
 @Service
+@RequiredArgsConstructor
 public class QuestionService {
 
-    private QuestionRepository questionRepository;
-
-    @Autowired
-    public QuestionService(QuestionRepository questionRepository) {
-        this.questionRepository = questionRepository;
-    }
+    private final QuestionRepository questionRepository;
 
     public List<Question> getAllQuestions() {
         return questionRepository.findAll();
